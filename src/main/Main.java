@@ -1,17 +1,30 @@
 package main;
 
+import model.Task;
+import persistence.TaskPersistence;
 import repository.TaskRepository;
 import service.TaskService;
 import utils.ConsoleUtils;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        DateTimeFormatter br = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        TaskRepository repositorio = new TaskRepository();
-        TaskService service = new TaskService(repositorio);
+        String caminho = "bd.txt";
 
+
+        TaskPersistence persistencia = new TaskPersistence(caminho);
+        List<Task> listaArquivo = persistencia.carregarArquivo();
+        TaskRepository repositorio = new TaskRepository(listaArquivo);
+        TaskService service = new TaskService(repositorio, persistencia);
         Scanner scanner = new Scanner(System.in);
 
         int opc = -1;
@@ -39,6 +52,7 @@ public class Main {
                     case 0:
                         ConsoleUtils.limparTela();
                         System.out.println("Programa Encerrado!\nAté Logo!");
+                        break;
                     case 1:
                         ConsoleUtils.limparTela();
                         System.out.println("===== NOVA TAREFA =====");

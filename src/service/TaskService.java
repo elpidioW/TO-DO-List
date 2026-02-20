@@ -2,6 +2,7 @@ package service;
 
 import model.Status;
 import model.Task;
+import persistence.TaskPersistence;
 import repository.TaskRepository;
 
 import java.time.LocalDate;
@@ -16,8 +17,11 @@ import java.util.List;
 public class TaskService {
 
     protected TaskRepository repositorio;
-    public TaskService(TaskRepository repositorio){
+    protected TaskPersistence persistencia;
+
+    public TaskService(TaskRepository repositorio, TaskPersistence persistecia){
         this.repositorio = repositorio;
+        this.persistencia = persistecia;
     }
 
 
@@ -63,7 +67,7 @@ public class TaskService {
         Task tarefa = new Task(titulo, descricao, dataTermino, nivelPrioridade, categoria, status);
         repositorio.addTaskRepo(tarefa);
         repositorio.getTaskRepo().sort(null);
-
+        persistencia.salvarArquivo(repositorio.getTaskRepo());
 
     }
 
@@ -137,8 +141,11 @@ public class TaskService {
 
         boolean aux = repositorio.delTaskRepo(id);
 
-        if(aux)
+        if(aux) {
             System.out.println("Tarefa removida");
+            persistencia.salvarArquivo(repositorio.getTaskRepo());
+        }
+
         else
             throw new Exception("ID Inválido");
 

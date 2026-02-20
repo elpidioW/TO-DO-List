@@ -1,9 +1,12 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 public class Task implements Comparable<Task>{
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         protected int id;
         protected String titulo;
         protected String descricao;
@@ -37,6 +40,7 @@ public class Task implements Comparable<Task>{
     }
 
     public LocalDate getDataTermino() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return dataTermino;
     }
 
@@ -76,7 +80,16 @@ public class Task implements Comparable<Task>{
         this.nivelPrioridade = nivelPrioridade;
         this.categoria = categoria;
         this.status = status;
+    }
 
+    public Task(int id, String titulo, String descricao, LocalDate dataTermino, int nivelPrioridade, String categoria, Status status){
+        this.id = id;
+        this.titulo = titulo;
+        this.descricao= descricao;
+        this.dataTermino = dataTermino;
+        this.nivelPrioridade = nivelPrioridade;
+        this.categoria = categoria;
+        this.status = status;
     }
 
     @Override

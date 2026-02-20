@@ -1,0 +1,4 @@
+3;Estudar Java;POO;21/12/2025;1;Back-End;TODO
+2;Fazer tarefa;atividade da faculdade;04/03/2025;2;faculdade;TODO
+4;Treinar;Academia;04/03/2025;2;Saude;DONE
+1;Comprar pão;fazer isso urgentemente;28/06/2025;5;outros;DOING
