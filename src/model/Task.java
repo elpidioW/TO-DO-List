@@ -1,19 +1,22 @@
 package model;
 
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
 public class Task implements Comparable<Task>{
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
         protected int id;
         protected String titulo;
         protected String descricao;
-        protected LocalDate dataTermino;
+        protected LocalDateTime dataHoraTermino;
         protected int nivelPrioridade;
         protected String categoria;
         protected Status status;
+        protected boolean alarmeAtivo;
+
 
     public int getId() {
         return id;
@@ -39,13 +42,12 @@ public class Task implements Comparable<Task>{
         this.descricao = descricao;
     }
 
-    public LocalDate getDataTermino() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return dataTermino;
+    public LocalDateTime getDataHoraTermino() {
+        return dataHoraTermino;
     }
 
-    public void setDataTermino(LocalDate dataTermino) {
-        this.dataTermino = dataTermino;
+    public void setDataHoraTermino(LocalDateTime dataHoraTermino) {
+        this.dataHoraTermino = dataHoraTermino;
     }
 
     public int getNivelPrioridade() {
@@ -72,34 +74,44 @@ public class Task implements Comparable<Task>{
         this.status = status;
     }
 
+    public boolean getAlarmeAtivo() {
+        return alarmeAtivo;
+    }
 
-    public Task(String titulo, String descricao, LocalDate dataTermino, int nivelPrioridade, String categoria, Status status){
+    public void setAlarmeAtivo(boolean alarmeAtivo) {
+        this.alarmeAtivo = alarmeAtivo;
+    }
+
+    public Task(String titulo, String descricao, LocalDateTime dataHoraTermino, int nivelPrioridade, String categoria, Status status, boolean alarmeAtivo){
         this.titulo = titulo;
         this.descricao= descricao;
-        this.dataTermino = dataTermino;
+        this.dataHoraTermino = dataHoraTermino;
         this.nivelPrioridade = nivelPrioridade;
         this.categoria = categoria;
         this.status = status;
+        this.alarmeAtivo = alarmeAtivo;
     }
 
-    public Task(int id, String titulo, String descricao, LocalDate dataTermino, int nivelPrioridade, String categoria, Status status){
+    public Task(int id, String titulo, String descricao, LocalDateTime dataHoraTermino, int nivelPrioridade, String categoria, Status status, boolean alarmeAtivo){
         this.id = id;
         this.titulo = titulo;
         this.descricao= descricao;
-        this.dataTermino = dataTermino;
+        this.dataHoraTermino = dataHoraTermino;
         this.nivelPrioridade = nivelPrioridade;
         this.categoria = categoria;
         this.status = status;
+        this.alarmeAtivo = alarmeAtivo;
     }
 
     @Override
     public String toString() {
         return  "\n" + titulo +
                 "\nDescrição: " + descricao +
-                "\nData de Término: " + dataTermino +
+                "\nData e Horário de Término: " + dataHoraTermino +
                 "\nNível de Prioridade: " + nivelPrioridade +
                 "\nCategoria: " + categoria +
-                "\nStatus: " + status;
+                "\nStatus: " + status +
+                "\nAlarme: " + ((alarmeAtivo)? "Ativado" : "Desativado") ;
     }
 
     @Override

@@ -5,7 +5,7 @@ import model.Task;
 import persistence.TaskPersistence;
 import repository.TaskRepository;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class TaskService {
     }
 
 
-    public void criaTask(String titulo, String descricao, String dataString, int nivelPrioridade, String categoria, int statusInt) throws Exception{
+    public void criaTask(String titulo, String descricao, String dataString, int nivelPrioridade, String categoria, int statusInt, int alarmeInt) throws Exception{
 
         if(titulo == null || titulo.isBlank()){
             throw new Exception("Titulo não pode ser vazio");
@@ -35,12 +35,12 @@ public class TaskService {
             throw new Exception("Descrição não pode ser vazia");
         }
 
-        LocalDate dataTermino;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDateTime dataHoraTermino;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         try{
-            dataTermino = LocalDate.parse(dataString, formatter);
+            dataHoraTermino = LocalDateTime.parse(dataString, formatter);
         }catch(DateTimeParseException e){
-            throw new Exception("Data inválida");
+            throw new Exception("Data ou horário inválido");
         }
 
         if(nivelPrioridade < 1 || nivelPrioridade > 5){
@@ -64,7 +64,23 @@ public class TaskService {
                 status = Status.DONE;
         }
 
-        Task tarefa = new Task(titulo, descricao, dataTermino, nivelPrioridade, categoria, status);
+
+        boolean alarmeAtivo;
+
+        if(alarmeInt < 1 || alarmeInt > 2){
+            throw new Exception("Alarme Inválido");
+        }
+        else{
+            if(alarmeInt == 1)
+                alarmeAtivo = true;
+            else
+                alarmeAtivo = false;
+        }
+
+
+
+
+        Task tarefa = new Task(titulo, descricao, dataHoraTermino, nivelPrioridade, categoria, status, alarmeAtivo);
         repositorio.addTaskRepo(tarefa);
         repositorio.getTaskRepo().sort(null);
         persistencia.salvarArquivo(repositorio.getTaskRepo());

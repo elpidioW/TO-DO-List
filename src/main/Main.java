@@ -16,7 +16,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        DateTimeFormatter br = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         String caminho = "bd.txt";
 
@@ -62,8 +61,8 @@ public class Main {
                         System.out.print("Descrição: ");
                         String desc = scanner.nextLine();
 
-                        System.out.print("Data (dd/MM/yyyy): ");
-                        String data = scanner.nextLine();
+                        System.out.print("Data (dd/MM/yyyy HH:mm:ss): ");
+                        String dataHora = scanner.nextLine();
 
                         System.out.print("Prioridade (1-5): ");
                         int prioridade = scanner.nextInt();
@@ -74,9 +73,14 @@ public class Main {
 
                         System.out.println(" 1-TODO 2-DOING 3-DONE\nNº Status: ");
                         int status = scanner.nextInt();
+                        scanner.nextLine();
 
-                        service.criaTask(titulo, desc, data, prioridade, categoria, status);
+                        System.out.println("Ativar alarme para esta tarefa? (2h de antecedência)\n");
+                        System.out.println(" 1-Sim 2-Não\nNº Opção: ");
+                        int alarmeAtivo = scanner.nextInt();
+                        scanner.nextLine();
 
+                        service.criaTask(titulo, desc, dataHora, prioridade, categoria, status, alarmeAtivo);
                         break;
 
                     case 2:

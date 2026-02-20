@@ -7,18 +7,17 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.nio.file.Files.readAllLines;
 
 public class TaskPersistence {
 
     protected String caminho;
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
     public TaskPersistence(String caminho){
 
@@ -32,7 +31,7 @@ public class TaskPersistence {
 
         try (FileWriter fw = new FileWriter(file); BufferedWriter br = new BufferedWriter(fw)){
             for(Task t : lista){
-                br.write(t.getId() + ";" + t.getTitulo() + ";" + t.getDescricao() + ";" + t.getDataTermino().format(formatter) + ";" + t.getNivelPrioridade() + ";" + t.getCategoria() + ";" + t.getStatus());
+                br.write(t.getId() + ";" + t.getTitulo() + ";" + t.getDescricao() + ";" + t.getDataHoraTermino().format(formatter) + ";" + t.getNivelPrioridade() + ";" + t.getCategoria() + ";" + t.getStatus() + ";" + t.getAlarmeAtivo());
                 br.newLine();
             }
             br.flush();
@@ -59,7 +58,7 @@ public class TaskPersistence {
             for(String linha : linhas){
                 String[] campos = linha.split(";");
 
-                Task aux = new Task(Integer.parseInt(campos[0]), campos[1], campos[2], LocalDate.parse(campos[3], formatter), Integer.parseInt(campos[4]), campos[5], Status.valueOf(campos[6]));
+                Task aux = new Task(Integer.parseInt(campos[0]), campos[1], campos[2], LocalDateTime.parse(campos[3], formatter), Integer.parseInt(campos[4]), campos[5], Status.valueOf(campos[6]), Boolean.parseBoolean(campos[7]));
                 listaTarefas.add(aux);
 
             }

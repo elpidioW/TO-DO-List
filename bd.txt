@@ -1,4 +1,5 @@
-3;Estudar Java;POO;21/12/2025;1;Back-End;TODO
-2;Fazer tarefa;atividade da faculdade;04/03/2025;2;faculdade;TODO
-4;Treinar;Academia;04/03/2025;2;Saude;DONE
-1;Comprar pão;fazer isso urgentemente;28/06/2025;5;outros;DOING
+3;Estudar Java;POO;21/12/2025 15:00:00;1;Back-End;TODO;true
+2;Fazer tarefa;atividade da faculdade;04/03/2025 15:00:00;2;faculdade;TODO;false
+4;Treinar;Academia;04/03/2025 15:00:00;2;Saude;DONE;true
+5;aaaa;Aaaaa;12/10/2024 02:16:00;4;teste;DOING;true
+1;Comprar pão;fazer isso urgentemente;28/06/2025 15:00:00;5;outros;DOING;false
