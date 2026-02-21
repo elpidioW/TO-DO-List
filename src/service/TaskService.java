@@ -8,6 +8,7 @@ import repository.TaskRepository;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -149,7 +150,7 @@ public class TaskService {
         List<Task> lista = new ArrayList<>(repositorio.getTaskRepo());
         lista.sort(Comparator.comparing(Task::getId));
         for(Task t : lista)
-            System.out.println(+ t.getId() + " | " + t.getTitulo() + "\n");
+            System.out.println(t.getId() + " | " + t.getTitulo() + "\n");
     }
 
 
@@ -167,4 +168,21 @@ public class TaskService {
 
 
     }
+
+    public void verificaAlarmes(List<Task> lista){
+        LocalDateTime agora =  LocalDateTime.now();
+
+        System.out.println("\n");
+        for(Task t : lista){
+            long diferencaMinutos = ChronoUnit.MINUTES.between(agora, t.getDataHoraTermino());//ver só questão do formato
+
+            if(diferencaMinutos > 0 && diferencaMinutos <= 180){
+                if(t.getStatus() != Status.DONE && t.getAlarmeAtivo() == true){
+                    System.out.println(t.getTitulo() + " | Faltam " + diferencaMinutos + " minutos pro vencimento da tarefa");
+
+                }
+            }
+        }
+    }
+
 }

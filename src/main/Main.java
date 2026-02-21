@@ -6,11 +6,6 @@ import repository.TaskRepository;
 import service.TaskService;
 import utils.ConsoleUtils;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,8 +13,6 @@ public class Main {
     public static void main(String[] args) {
 
         String caminho = "bd.txt";
-
-
         TaskPersistence persistencia = new TaskPersistence(caminho);
         List<Task> listaArquivo = persistencia.carregarArquivo();
         TaskRepository repositorio = new TaskRepository(listaArquivo);
@@ -28,9 +21,10 @@ public class Main {
 
         int opc = -1;
         do {
-            ConsoleUtils.limparTela();
 
-            System.out.println("===== TODO LIST =====");
+            ConsoleUtils.limparTela();
+            service.verificaAlarmes(listaArquivo);
+            System.out.println("\n===== TODO LIST =====");
             System.out.println("1 - Criar tarefa");
             System.out.println("2 - Listar tarefas");
             System.out.println("3 - Deletar tarefa");
@@ -75,8 +69,8 @@ public class Main {
                         int status = scanner.nextInt();
                         scanner.nextLine();
 
-                        System.out.println("Ativar alarme para esta tarefa? (2h de antecedência)\n");
-                        System.out.println(" 1-Sim 2-Não\nNº Opção: ");
+                        System.out.println("Ativar alarme para esta tarefa? (3h de antecedência)");
+                        System.out.println("1-Sim 2-Não\nNº Opção: ");
                         int alarmeAtivo = scanner.nextInt();
                         scanner.nextLine();
 
