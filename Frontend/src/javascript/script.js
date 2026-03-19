@@ -17,5 +17,6 @@ botaoFechar.onclick = function(){
 }
 
 botaoCriarTarefa.onclick = function(){
+    modalJanela.close();
     console.log("funcionou");
 }
