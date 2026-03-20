@@ -96,7 +96,6 @@ html, body {
 
 
 
-
 #botao_abrir_modal {
 
   position: fixed;
@@ -152,6 +151,7 @@ dialog{
 }
 
 
+
 .status-prioridade {
   display: flex !important;
   flex-direction: row !important; 
@@ -177,6 +177,8 @@ dialog{
   flex-direction: column;
   gap: 10px;
 }
+
+
 
 #formularioTarefa input,
 #formularioTarefa select,
@@ -241,4 +243,21 @@ button[type="submit"] {
 
 button:hover {
   opacity: 0.9;
+}
+
+
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px; 
+}
+::-webkit-scrollbar-track {
+  background: var(--surface);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-hi);
+  border-radius: 10px;
+  border: 2px solid var(--surface);
 }
