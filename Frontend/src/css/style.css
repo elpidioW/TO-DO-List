@@ -233,7 +233,7 @@ button[type="submit"] {
   cursor: pointer;
 }
 
-#botao_fechar_modal {
+#botao_cancelar {
   background: #ccc;
   border: none;
   padding: 8px 12px;
