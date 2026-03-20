@@ -11,6 +11,15 @@ As funcionalidades implementadas são:
 * Persistência em arquivo (.txt)
 * Sistema de Alarme
 
+### Funcionalidades do frontend:
+* Cadastro de tarefas
+* Edição de tarefas existentes
+* Remoção de tarefas
+* Listagem dinâmica das tarefas
+* Organização automática por status (To-Do, Doing e Done)
+* Utilização de modal para criação e edição de tarefas
+
+
 ### Como executar:
 * Clone o repositório.
 * Abra o projeto na IDE (IntelliJ).
