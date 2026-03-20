@@ -7,7 +7,6 @@ const botaoFechar = document.getElementById("botao_fechar_modal");
 const botaoCriarTarefa = document.getElementById("botao_criar_tarefa");
 
 
-
 botaoAbrir.onclick = function(){
     modalJanela.showModal();
 }
